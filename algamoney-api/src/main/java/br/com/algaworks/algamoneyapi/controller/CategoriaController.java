@@ -1,4 +1,4 @@
-package br.com.algaworks.algamoneyapi.algamoneyapi.controller;
+package br.com.algaworks.algamoneyapi.controller;
 
 import java.util.List;
 
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.algaworks.algamoneyapi.algamoneyapi.model.Categoria;
-import br.com.algaworks.algamoneyapi.algamoneyapi.repository.CategoriaRepository;
+import br.com.algaworks.algamoneyapi.model.Categoria;
+import br.com.algaworks.algamoneyapi.repository.CategoriaRepository;
 
 @RestController
 @RequestMapping("categorias")

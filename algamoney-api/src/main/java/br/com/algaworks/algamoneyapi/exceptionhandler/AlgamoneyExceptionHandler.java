@@ -1,4 +1,4 @@
-package br.com.algaworks.algamoneyapi.algamoneyapi.exceptionhandler;
+package br.com.algaworks.algamoneyapi.exceptionhandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package br.com.algaworks.algamoneyapi.algamoneyapi.model;
+package br.com.algaworks.algamoneyapi.model;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;

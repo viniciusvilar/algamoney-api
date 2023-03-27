@@ -1,8 +1,8 @@
-package br.com.algaworks.algamoneyapi.algamoneyapi.repository;
+package br.com.algaworks.algamoneyapi.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.algaworks.algamoneyapi.algamoneyapi.model.Pessoa;
+import br.com.algaworks.algamoneyapi.model.Pessoa;
 
 public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
 
