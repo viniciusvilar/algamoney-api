@@ -23,7 +23,7 @@ public class Pessoa {
     private Endereco endereco;
 
     @NotNull
-    private Boolean ativo;
+    private Boolean ativo = true;
 
     public Pessoa() {
 
