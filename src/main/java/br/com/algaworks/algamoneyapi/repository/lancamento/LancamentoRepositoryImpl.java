@@ -13,6 +13,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.algaworks.algamoneyapi.model.Lancamento;
+import br.com.algaworks.algamoneyapi.model.Lancamento_;
 import br.com.algaworks.algamoneyapi.repository.filter.LancamentoFilter;
 
 public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
@@ -32,7 +33,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 
 
         TypedQuery<Lancamento> query = manager.createQuery(criteria);
-        return null;
+        return query.getResultList();
     }
 
     private Predicate[] criarRestricoes(LancamentoFilter lancamentoFilter, CriteriaBuilder builder, Root<Lancamento> root) {
@@ -41,17 +42,21 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
         
         if (lancamentoFilter.getDescricao() != null) {
             predicates.add(builder.like(
-                builder.lower(root.get("descricao")),
+                builder.lower(root.get(Lancamento_.descricao)),
                 "%" + lancamentoFilter.getDescricao().toLowerCase() + "%"
             ));
         }
 
         if (lancamentoFilter.getDataVencimentoDe() != null) {
-            //predicates.add(e);
+            predicates.add(
+                builder.greaterThanOrEqualTo(root.get(Lancamento_.dataVencimento), lancamentoFilter.getDataVencimentoDe())
+            );
         }
 
         if (lancamentoFilter.getDataVencimentoAte() != null) {
-            //predicates.add(e);
+            predicates.add(
+                builder.lessThanOrEqualTo(root.get(Lancamento_.dataVencimento), lancamentoFilter.getDataVencimentoAte())
+            );
         }
         
         return predicates.toArray(new Predicate[predicates.size()]);

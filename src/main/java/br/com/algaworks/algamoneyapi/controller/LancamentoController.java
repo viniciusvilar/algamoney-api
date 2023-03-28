@@ -43,6 +43,7 @@ public class LancamentoController {
     public ResponseEntity pesquisar(LancamentoFilter lancamentoFilter) {
 
         var lancamentos = lancamentoRepository.filtrar(lancamentoFilter);
+        System.out.println(lancamentos);
         return ResponseEntity.ok(lancamentos);
 
     }
