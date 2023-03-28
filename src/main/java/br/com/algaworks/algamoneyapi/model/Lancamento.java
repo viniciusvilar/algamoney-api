@@ -23,7 +23,6 @@ public class Lancamento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
-	@Column
 	private String descricao;
 	
 	@NotNull
@@ -37,7 +36,6 @@ public class Lancamento {
 	@Column
 	private BigDecimal valor;
 	
-	@Column
 	private String observacao;
 	
 	@NotNull
