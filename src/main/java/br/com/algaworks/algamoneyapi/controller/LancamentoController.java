@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import br.com.algaworks.algamoneyapi.exceptionhandler.AlgamoneyExceptionHandler.Erro;
 import br.com.algaworks.algamoneyapi.model.Lancamento;
@@ -40,10 +43,9 @@ public class LancamentoController {
     private MessageSource messageSource;
 
     @GetMapping
-    public ResponseEntity pesquisar(LancamentoFilter lancamentoFilter) {
+    public ResponseEntity<Page> pesquisar(LancamentoFilter lancamentoFilter, Pageable pageable) {
 
-        var lancamentos = lancamentoRepository.filtrar(lancamentoFilter);
-        System.out.println(lancamentos);
+        var lancamentos = lancamentoRepository.filtrar(lancamentoFilter, pageable);
         return ResponseEntity.ok(lancamentos);
 
     }
@@ -64,6 +66,15 @@ public class LancamentoController {
 
         return ResponseEntity.created(uri).body(lancamento);
         
+
+    }
+
+    @DeleteMapping("/{codigo}")
+    public ResponseEntity deletar(@PathVariable Long codigo) {
+
+        var lancamento = lancamentoRepository.getReferenceByCodigo(codigo);
+        lancamentoRepository.delete(lancamento);
+        return ResponseEntity.noContent().build();
 
     }
 
